@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Artist Portfolio</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -130,13 +131,64 @@
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
-        <h2>Let's Work Together</h2>
-        <form id="contact-form">
-            <input type="text" placeholder="Name" required>
-            <input type="email" placeholder="Email" required>
-            <textarea placeholder="Tell me about your project" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 class="glitch-text">Let's Create Something Amazing</h2>
+                <p class="contact-description">Ready to bring your vision to life? I'm always excited to collaborate on new projects and create unique digital experiences.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>artist@email.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-availability">
+                        <div class="status-indicator online"></div>
+                        <span>Available for Commissions</span>
+                    </div>
+                </div>
+            </div>
+            
+            <form id="contact-form" class="animated-form">
+                <div class="form-group">
+                    <input type="text" id="name" required>
+                    <label for="name">Your Name</label>
+                    <div class="line"></div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="email" id="email" required>
+                    <label for="email">Your Email</label>
+                    <div class="line"></div>
+                </div>
+                
+                <div class="form-group">
+                    <select id="project-type" required>
+                        <option value="" disabled selected>Select Project Type</option>
+                        <option value="character">Character Design</option>
+                        <option value="concept">Concept Art</option>
+                        <option value="illustration">Digital Illustration</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <textarea id="message" required></textarea>
+                    <label for="message">Tell me about your project</label>
+                    <div class="line"></div>
+                </div>
+                
+                <div class="form-footer">
+                    <button type="submit" class="submit-btn">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                    <p class="response-time">Average response time: 24 hours</p>
+                </div>
+            </form>
+        </div>
     </section>
 
     <!-- Footer -->
