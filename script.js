@@ -362,3 +362,69 @@ document.addEventListener('DOMContentLoaded', () => {
         nonCriticalCSS.media = 'all';
     });
 });
+
+// Optimize scroll-based animations
+const optimizedScroll = () => {
+    requestAnimationFrame(() => {
+        const scrolled = window.pageYOffset;
+        const heroContent = document.querySelector('.hero h1');
+        if (heroContent) {
+            heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+        }
+    });
+};
+
+window.addEventListener('scroll', optimizedScroll, { passive: true });
+
+// Optimize intersection observer
+const smoothIntersect = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animated-element');
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, {
+    threshold: 0.2,
+    rootMargin: '50px'
+});
+
+// Apply smooth animations to elements
+document.querySelectorAll('.art-piece, .text-animate, .skill-tag').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    smoothIntersect.observe(el);
+});
+
+// Optimize hover effects
+const optimizeHover = (element) => {
+    let timeout;
+    
+    element.addEventListener('mouseenter', () => {
+        clearTimeout(timeout);
+        requestAnimationFrame(() => {
+            element.classList.add('hovered');
+        });
+    });
+
+    element.addEventListener('mouseleave', () => {
+        timeout = setTimeout(() => {
+            requestAnimationFrame(() => {
+                element.classList.remove('hovered');
+            });
+        }, 50);
+    });
+};
+
+// Apply optimized hover effects
+document.querySelectorAll('.art-piece, .skill-tag, .button').forEach(optimizeHover);
+
+// Smooth scroll to top when clicking the logo
+document.getElementById('backToTop').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
