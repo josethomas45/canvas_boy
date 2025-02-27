@@ -6,6 +6,9 @@
     --text-secondary: #a0a0a0;
     --accent: #7000ff;
     --hover-accent: #8f33ff;
+    --container-padding: clamp(20px, 5vw, 40px);
+    --hero-title-size: clamp(2.5rem, 8vw, 4.5rem);
+    --section-padding: clamp(60px, 10vh, 100px);
 }
 
 * {
@@ -98,7 +101,7 @@ nav {
 }
 
 .hero h1 {
-    font-size: 4.5rem;
+    font-size: var(--hero-title-size);
     margin-bottom: 20px;
     background: linear-gradient(45deg, var(--text-primary), var(--accent));
     -webkit-background-clip: text;
@@ -158,8 +161,8 @@ nav {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(15px, 3vw, 30px);
     margin-bottom: 40px;
 }
 
@@ -752,4 +755,115 @@ footer {
     .contact-info {
         padding-right: 0;
     }
+}
+
+/* Responsive Typography */
+h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+p { font-size: clamp(1rem, 2vw, 1.1rem); }
+
+/* Responsive Grid Layout */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(15px, 3vw, 30px);
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    nav {
+        padding: 15px var(--container-padding);
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        background: var(--bg-secondary);
+        flex-direction: column;
+        padding: 80px 20px;
+        transition: 0.3s ease;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links a {
+        margin: 15px 0;
+        font-size: 1.2rem;
+    }
+}
+
+/* Responsive Hero Section */
+.hero {
+    min-height: 100vh;
+    padding: var(--container-padding);
+}
+
+/* Responsive About Section */
+@media (max-width: 968px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .profile-container {
+        width: min(300px, 80%);
+        height: auto;
+        aspect-ratio: 1;
+    }
+}
+
+/* Responsive Contact Section */
+@media (max-width: 868px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .contact-info {
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .contact-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+}
+
+/* Add smooth scrollbar for desktop */
+@media (min-width: 769px) {
+    body {
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent) var(--bg-primary);
+    }
+}
+
+/* Add these new utility classes */
+.container {
+    width: min(1200px, 100% - var(--container-padding) * 2);
+    margin-inline: auto;
+}
+
+.flow > * + * {
+    margin-top: var(--flow-space, 1em);
 }

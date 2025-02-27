@@ -198,3 +198,167 @@ document.querySelectorAll('.art-piece').forEach(piece => {
     piece.querySelector('#likeCount').textContent = likes;
     piece.querySelector('#viewCount').textContent = views;
 });
+
+// Remove the existing hamburger menu code and replace with this updated version
+const nav = document.querySelector('nav');
+const navLinks = document.querySelector('.nav-links');
+
+// Create hamburger button
+const hamburger = document.createElement('button');
+hamburger.classList.add('hamburger');
+hamburger.innerHTML = `
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+`;
+nav.appendChild(hamburger);
+
+// Toggle menu
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
+});
+
+// Close menu when clicking on a link
+navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        document.body.classList.remove('menu-open');
+    });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        document.body.classList.remove('menu-open');
+    }
+});
+
+// Responsive image loading
+function loadResponsiveImage(img) {
+    const src = img.getAttribute('src');
+    const mobileSrc = src.replace('.jpg', '-mobile.jpg');
+    
+    if (window.innerWidth <= 768) {
+        img.setAttribute('src', mobileSrc);
+    }
+}
+
+document.querySelectorAll('.art-piece img').forEach(loadResponsiveImage);
+
+// Debounced resize handler
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Handle resize events
+const handleResize = debounce(() => {
+    document.querySelectorAll('.art-piece img').forEach(loadResponsiveImage);
+}, 250);
+
+window.addEventListener('resize', handleResize);
+
+// Enhance form accessibility
+const form = document.getElementById('contact-form');
+const formInputs = form.querySelectorAll('input, textarea, select');
+
+formInputs.forEach(input => {
+    // Add aria labels
+    input.setAttribute('aria-label', input.placeholder);
+    
+    // Add focus states
+    input.addEventListener('focus', () => {
+        input.closest('.form-group').classList.add('focused');
+    });
+    
+    input.addEventListener('blur', () => {
+        if (!input.value) {
+            input.closest('.form-group').classList.remove('focused');
+        }
+    });
+});
+
+// Lazy loading images
+const lazyImages = document.querySelectorAll('img[data-src]');
+const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            observer.unobserve(img);
+        }
+    });
+});
+
+lazyImages.forEach(img => imageObserver.observe(img));
+
+// Add touch support for gallery items
+document.querySelectorAll('.art-piece').forEach(piece => {
+    piece.addEventListener('touchstart', () => {
+        piece.querySelector('.overlay').style.bottom = '0';
+    }, { passive: true });
+    
+    piece.addEventListener('touchend', () => {
+        setTimeout(() => {
+            piece.querySelector('.overlay').style.bottom = '-100%';
+        }, 1000);
+    });
+});
+
+// Enhance modal for mobile
+const modal = document.getElementById('artworkModal');
+
+modal.addEventListener('touchstart', handleTouchStart, false);
+modal.addEventListener('touchmove', handleTouchMove, false);
+
+let xDown = null;
+let yDown = null;
+
+function handleTouchStart(evt) {
+    xDown = evt.touches[0].clientX;
+    yDown = evt.touches[0].clientY;
+}
+
+function handleTouchMove(evt) {
+    if (!xDown || !yDown) return;
+
+    const xUp = evt.touches[0].clientX;
+    const yUp = evt.touches[0].clientY;
+    const xDiff = xDown - xUp;
+    const yDiff = yDown - yUp;
+
+    if (Math.abs(yDiff) > Math.abs(xDiff) && yDiff > 0) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    xDown = null;
+    yDown = null;
+}
+
+// Add performance optimization
+document.addEventListener('DOMContentLoaded', () => {
+    // Defer non-critical CSS
+    const nonCriticalCSS = document.createElement('link');
+    nonCriticalCSS.rel = 'stylesheet';
+    nonCriticalCSS.href = 'non-critical.css';
+    nonCriticalCSS.media = 'print';
+    document.head.appendChild(nonCriticalCSS);
+    
+    requestIdleCallback(() => {
+        nonCriticalCSS.media = 'all';
+    });
+});
