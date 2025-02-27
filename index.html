@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Artist Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">ARTIST NAME</div>
+        <div class="nav-links">
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Digital Art & Design</h1>
+        <p>Creating unique digital experiences</p>
+    </section>
+
+    <!-- Work Gallery -->
+    <section id="work" class="gallery">
+        <h2 class="section-title glitch-text">Selected Works</h2>
+        <div class="category-filter">
+            <button class="filter-btn active" data-filter="all">All Works</button>
+            <button class="filter-btn" data-filter="digital">Digital Art</button>
+            <button class="filter-btn" data-filter="character">Characters</button>
+            <button class="filter-btn" data-filter="concept">Concepts</button>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="art-piece" data-category="digital" data-description="Digital Painting - 2024">
+                <div class="art-container">
+                    <img src="path/to/art1.jpg" alt="Digital Painting">
+                    <div class="overlay">
+                        <h3>Mystic Forest</h3>
+                        <p>Digital Painting - 2024</p>
+                        <div class="art-actions">
+                            <button class="view-details">View Details</button>
+                            <span class="price">$499</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-piece" data-category="character" data-description="Character Design - 2024">
+                <div class="art-container">
+                    <img src="path/to/art2.jpg" alt="Character Design">
+                    <div class="overlay">
+                        <h3>Cyber Warrior</h3>
+                        <p>Character Design - 2024</p>
+                        <div class="art-actions">
+                            <button class="view-details">View Details</button>
+                            <span class="price">$699</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-piece" data-category="concept" data-description="Concept Art - 2024">
+                <div class="art-container">
+                    <img src="path/to/art3.jpg" alt="Concept Art">
+                    <div class="overlay">
+                        <h3>Future City</h3>
+                        <p>Concept Art - 2024</p>
+                        <div class="art-actions">
+                            <button class="view-details">View Details</button>
+                            <span class="price">$899</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for artwork details -->
+        <div class="artwork-modal" id="artworkModal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div class="modal-image">
+                    <img src="" alt="Artwork" id="modalImage">
+                </div>
+                <div class="modal-details">
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalDescription"></p>
+                    <div class="artwork-stats">
+                        <span class="stat">
+                            <i class="fas fa-heart"></i>
+                            <span id="likeCount">0</span>
+                        </span>
+                        <span class="stat">
+                            <i class="fas fa-eye"></i>
+                            <span id="viewCount">0</span>
+                        </span>
+                    </div>
+                    <button class="commission-btn">Commission Similar Work</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="load-more">
+            <button class="load-more-btn">Load More Works</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2 class="glitch-text">About Me</h2>
+        <div class="about-content">
+            <div class="profile-container">
+                <img src="path/to/profile.jpg" alt="Artist Profile" class="profile-img">
+                <div class="profile-glow"></div>
+            </div>
+            <div class="about-text">
+                <h3 class="gradient-text">Digital Artist & Designer</h3>
+                <p class="text-animate">I'm a digital artist specializing in concept art and character design. With over 5 years of experience, I've worked with various clients from gaming studios to independent publishers.</p>
+                <p class="text-animate delay-1">My work focuses on creating immersive worlds and memorable characters that tell compelling stories.</p>
+                <div class="skills">
+                    <span class="skill-tag">Concept Art</span>
+                    <span class="skill-tag">Character Design</span>
+                    <span class="skill-tag">Digital Painting</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Let's Work Together</h2>
+        <form id="contact-form">
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Tell me about your project" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#" target="_blank">Instagram</a>
+            <a href="#" target="_blank">Twitter</a>
+            <a href="#" target="_blank">LinkedIn</a>
+        </div>
+        <p>© 2024 Artist Name. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
